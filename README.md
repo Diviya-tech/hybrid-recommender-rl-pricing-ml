@@ -1,4 +1,5 @@
 Hybrid Recommender System with Reinforcement Learning-Based Dynamic Pricing
+
 📌 Project Overview
 
 This project builds a hybrid recommender system that combines behavioral event data with item metadata to generate personalized recommendations and dynamically adjust pricing using reinforcement learning.
@@ -76,6 +77,7 @@ Performance visualization
 The system integrates both collaborative behavior patterns and product-level signals to improve recommendation quality.
 
 🤖 Modeling Approach
+
 1️⃣ Hybrid Recommendation Strategy
 
 Behavioral aggregation of user interactions
@@ -163,5 +165,6 @@ Deep learning-based recommendation models
 Advanced policy gradient methods for pricing
 
 A/B testing simulation
+
 
 
