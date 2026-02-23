@@ -1,0 +1,5 @@
+Retail Rocket Recommender System Dataset:
+https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset
+
+Download dataset and place large CSV files locally inside /data.
+Large files are excluded from GitHub.
