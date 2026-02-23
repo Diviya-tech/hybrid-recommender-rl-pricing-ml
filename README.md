@@ -44,14 +44,21 @@ Due to file size constraints, raw datasets are not included in this repository.
 The project is structured as:
 
 hybrid-recommender-rl-pricing/
-│
+
 ├── data/
+
 ├── diagrams/
+
 ├── notebooks/
+
 ├── results/
+
 ├── README.md
+
 ├── requirements.txt
+
 └── .gitignore
+
 Key Components
 
 Data preprocessing and cleaning
@@ -156,4 +163,5 @@ Deep learning-based recommendation models
 Advanced policy gradient methods for pricing
 
 A/B testing simulation
+
 
