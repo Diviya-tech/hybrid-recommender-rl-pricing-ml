@@ -1,6 +1,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?logo=jupyter)
 ![License](https://img.shields.io/badge/License-MIT-green)
+
 Hybrid Recommender System with Reinforcement Learning-Based Dynamic Pricing
 
 📌 Project Overview
@@ -168,6 +169,7 @@ Deep learning-based recommendation models
 Advanced policy gradient methods for pricing
 
 A/B testing simulation
+
 
 
 
