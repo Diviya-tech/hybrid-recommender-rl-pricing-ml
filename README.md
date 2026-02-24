@@ -88,7 +88,7 @@ Raw Behavioral Events + Item Metadata
 
 ### Customer Segmentation — PCA Projection
 
-![Price Multiplier per Cluster](results/cluster_segmentation.png))
+![Customer Segments PCA](results/PCA.png)
 
 > PCA Dimension 1 captures **Income + Frequency Mix** | PCA Dimension 2 captures **Spending Behavior Mix**
 
@@ -105,8 +105,7 @@ Raw Behavioral Events + Item Metadata
 
 ### RL Dynamic Pricing — Price Multiplier per Cluster
 
-![Price Multiplier per Cluster](results/price_multiplier_per_cluster.png)
-
+![Price Multiplier per Cluster](results/cluster_segmentation.png)
 The RL pricing agent converged to a uniform **1.10x price multiplier** across all 4 customer segments.
 
 **Analysis:** The agent successfully learned to apply a consistent 10% price increase. The uniform output across clusters suggests the reward signal did not provide sufficient segment-level differentiation to justify varied strategies — the agent found a stable, safe policy rather than an explorative one.
@@ -175,4 +174,5 @@ hybrid-recommender-rl-pricing-ml/
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)]([https://linkedin.com/in/sridivyadasari])
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/Diviya-tech)
+
 
