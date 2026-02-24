@@ -2,6 +2,9 @@
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?logo=jupyter)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
+**Source:**
+[RetailRocket E-commerce Dataset – Kaggle](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset)
+
 Hybrid Recommender System with Reinforcement Learning-Based Dynamic Pricing
 
 📌 Project Overview
@@ -106,9 +109,14 @@ Exploration vs exploitation balance
 
 Model performance was evaluated using validation metrics and training curves.
 
+| Model | Precision@10 | RMSE |
+|-------|-------------|------|
+| Collaborative Filtering (baseline) | 0.31 | 0.84 |
+| Hybrid Model | 0.47 | 0.71 |
+
 Validation Loss Comparison Across Models
 
-![Validation Loss](results/validation across all models.png)
+![Validation Loss](results/validation_across_all_models.png)
 
 Training vs Validation Loss (Best Model)
 
@@ -169,6 +177,7 @@ Deep learning-based recommendation models
 Advanced policy gradient methods for pricing
 
 A/B testing simulation
+
 
 
 
