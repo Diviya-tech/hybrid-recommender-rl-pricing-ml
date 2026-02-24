@@ -88,7 +88,7 @@ Raw Behavioral Events + Item Metadata
 
 ### Customer Segmentation — PCA Projection
 
-![Customer Segments PCA](results/customer_segments_pca.png)
+![Price Multiplier per Cluster](results/cluster_segmentation.png))
 
 > PCA Dimension 1 captures **Income + Frequency Mix** | PCA Dimension 2 captures **Spending Behavior Mix**
 
@@ -175,3 +175,4 @@ hybrid-recommender-rl-pricing-ml/
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)]([https://linkedin.com/in/sridivyadasari])
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/Diviya-tech)
+
