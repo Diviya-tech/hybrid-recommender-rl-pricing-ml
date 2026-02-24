@@ -1,185 +1,177 @@
+# 🎯 Hybrid Recommender System with RL-Based Dynamic Pricing
+
 ![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?logo=jupyter)
+![Scikit-learn](https://img.shields.io/badge/Scikit--learn-ML-red?logo=scikit-learn)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-**Source:**
-[RetailRocket E-commerce Dataset – Kaggle](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset)
+A hybrid recommender system that combines collaborative filtering and content-based signals with a reinforcement learning pricing agent — built on large-scale e-commerce behavioral event data.
 
-Hybrid Recommender System with Reinforcement Learning-Based Dynamic Pricing
+---
 
-📌 Project Overview
+## 📌 Project Overview
 
-This project builds a hybrid recommender system that combines behavioral event data with item metadata to generate personalized recommendations and dynamically adjust pricing using reinforcement learning.
+This project builds an end-to-end intelligent commerce system that:
 
-The system leverages user interaction history (views, add-to-cart, transactions) and product attributes to model user preferences, optimize recommendations, and simulate adaptive pricing strategies.
+- **Segments customers** into behavioral clusters using unsupervised learning
+- **Generates personalized recommendations** by combining user interaction history with product metadata
+- **Optimizes pricing dynamically** per customer segment using a reinforcement learning agent
 
-This project focuses on:
+The system is designed to simultaneously improve conversion rates and maximize revenue by connecting who the user is to what they see and what price they're offered.
 
-Large-scale event data preprocessing
+---
 
-Feature engineering from user–item interactions
+## 📊 Dataset
 
-Hybrid recommendation modeling
+**Source:** [RetailRocket E-commerce Dataset – Kaggle](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset)
 
-Reinforcement learning-based dynamic pricing logic
+| File | Description |
+|------|-------------|
+| `events.csv` | User interaction events (view, add-to-cart, transaction) |
+| `item_properties_part1/2.csv` | Product metadata and attributes |
+| `category_tree.csv` | Product category hierarchy |
 
-Model evaluation and performance comparison
+> Due to file size constraints, raw datasets are not included. Download from the Kaggle link above.
 
-📊 Dataset
+---
 
-The project uses e-commerce behavioral data including:
+## 🏗️ System Architecture
 
-events.csv – user interaction events
+```
+Raw Behavioral Events + Item Metadata
+              ↓
+     Data Preprocessing & Feature Engineering
+              ↓
+    ┌─────────────────────────────┐
+    │   Customer Segmentation     │  ← K-Means + PCA
+    │   (4 behavioral clusters)   │
+    └────────────┬────────────────┘
+                 ↓
+    ┌─────────────────────────────┐
+    │   Hybrid Recommender        │  ← Collaborative + Content-Based
+    │   (per-cluster signals)     │
+    └────────────┬────────────────┘
+                 ↓
+    ┌─────────────────────────────┐
+    │   RL Pricing Agent          │  ← Q-Learning, reward = revenue signal
+    │   (cluster-aware pricing)   │
+    └────────────┬────────────────┘
+                 ↓
+     Personalized Recommendation + Optimized Price
+```
 
-item_properties_part1/2.csv – product metadata
+---
 
-category_tree.csv – product hierarchy
+## 🔍 Approach
 
-The dataset captures:
+### 1️⃣ Customer Segmentation
+- Aggregated user behavior (views, add-to-cart, transactions) into per-user feature vectors
+- Applied **StandardScaler** normalization across Income, Frequency, and Spending features
+- Used **Elbow Method + Silhouette Score** to determine optimal K=4
+- Trained **K-Means clustering** to assign each user to a behavioral segment
+- Applied **PCA** to project 3D feature space into 2D for visualization
 
-User session behavior
+### 2️⃣ Hybrid Recommendation
+- **Collaborative Filtering** — Matrix factorization on user-item interaction history
+- **Content-Based** — Item metadata features (category, price range, interaction type)
+- **Hybrid Fusion** — Weighted combination of both signals per customer cluster
 
-Item interactions
+### 3️⃣ RL-Based Dynamic Pricing
+- **State:** Customer cluster ID + item features + interaction context
+- **Action:** Price multiplier adjustment (increase / decrease / hold)
+- **Reward:** Revenue signal (conversion probability × applied price)
+- **Algorithm:** Q-Learning with exploration-exploitation (ε-greedy)
 
-Product category structure
+---
 
-Time-based activity patterns
+## 📈 Results
 
-Due to file size constraints, raw datasets are not included in this repository.
+### Customer Segmentation — PCA Projection
 
-🏗️ System Architecture
+![Customer Segments PCA](results/customer_segments_pca.png)
 
-The project is structured as:
+> PCA Dimension 1 captures **Income + Frequency Mix** | PCA Dimension 2 captures **Spending Behavior Mix**
 
-hybrid-recommender-rl-pricing/
+4 distinct customer segments were identified:
 
-├── data/
+| Cluster | Behavioral Profile | Recommendation Strategy |
+|---------|--------------------|------------------------|
+| 0 🔴 | High spend, lower frequency | Premium & exclusive products |
+| 1 🟠 | Mid-tier, moderate engagement | Balanced mix, discount triggers |
+| 2 🟢 | High frequency, budget-conscious | Volume deals, loyalty-based items |
+| 3 🔵 | High frequency + high spend | VIP products, retention-first |
 
-├── diagrams/
+---
 
-├── notebooks/
+### RL Dynamic Pricing — Price Multiplier per Cluster
 
-├── results/
+![Price Multiplier per Cluster](results/price_multiplier_per_cluster.png)
 
-├── README.md
+The RL pricing agent converged to a uniform **1.10x price multiplier** across all 4 customer segments.
 
-├── requirements.txt
+**Analysis:** The agent successfully learned to apply a consistent 10% price increase. The uniform output across clusters suggests the reward signal did not provide sufficient segment-level differentiation to justify varied strategies — the agent found a stable, safe policy rather than an explorative one.
 
-└── .gitignore
+**Planned improvement:** Incorporating cluster-specific demand elasticity curves into the reward function would push the agent to learn differentiated pricing — for example, higher multipliers for VIP/high-spend clusters and lower multipliers for budget-sensitive segments.
 
-Key Components
+---
 
-Data preprocessing and cleaning
+## 💡 Business Impact
 
-Feature extraction from user-item interactions
+By connecting segmentation → recommendation → pricing into a single pipeline, this framework enables:
 
-Hybrid recommendation logic
+- **Personalized product discovery** — users see items relevant to their behavioral profile
+- **Revenue optimization** — pricing adapts to willingness-to-pay signals per segment
+- **Scalable architecture** — new clusters or pricing strategies can be added modularly
 
-Reinforcement learning-based pricing strategy
+---
 
-Model training and validation
+## 🛠️ Tech Stack
 
-Performance visualization
+`Python` `Scikit-learn` `Pandas` `NumPy` `Matplotlib` `Seaborn` `Jupyter Notebook`
 
-The system integrates both collaborative behavior patterns and product-level signals to improve recommendation quality.
+---
 
-🤖 Modeling Approach
+## 🚀 How to Run
 
-1️⃣ Hybrid Recommendation Strategy
-
-Behavioral aggregation of user interactions
-
-Item-level feature representation
-
-User–item interaction modeling
-
-Combined collaborative + content-based signals
-
-2️⃣ Reinforcement Learning for Pricing
-
-Simulated reward mechanism
-
-Dynamic pricing policy adjustment
-
-Iterative optimization of pricing decisions
-
-Exploration vs exploitation balance
-
-📈 Results
-
-Model performance was evaluated using validation metrics and training curves.
-
-| Model | Precision@10 | RMSE |
-|-------|-------------|------|
-| Collaborative Filtering (baseline) | 0.31 | 0.84 |
-| Hybrid Model | 0.47 | 0.71 |
-
-Validation Loss Comparison Across Models
-
-![Validation Loss](results/validation_across_all_models.png)
-
-Training vs Validation Loss (Best Model)
-
-The final model demonstrates:
-
-Stable convergence
-
-Reduced validation loss
-
-Improved generalization performance
-
-💡 Business Impact
-
-This framework can be applied in:
-
-E-commerce personalization
-
-Dynamic pricing engines
-
-Demand-aware price optimization
-
-User engagement maximization
-
-By integrating recommendation and pricing strategies, businesses can optimize both conversion rates and revenue generation.
-
-🛠️ Tech Stack
-
-Python
-
-Pandas
-
-NumPy
-
-Scikit-learn
-
-Matplotlib
-
-Reinforcement Learning concepts
-
-Jupyter Notebook
-
-🚀 How to Run
-
-Install dependencies:
-
+```bash
+git clone https://github.com/Diviya-tech/hybrid-recommender-rl-pricing-ml
+cd hybrid-recommender-rl-pricing-ml
 pip install -r requirements.txt
+jupyter notebook
+```
 
-Open notebooks inside the notebooks/ directory.
+Open notebooks inside the `notebooks/` directory and run cells sequentially.
 
-Run preprocessing and model training cells sequentially.
+---
 
-📌 Future Improvements
+## 📁 Project Structure
 
-Real-time deployment pipeline
+```
+hybrid-recommender-rl-pricing-ml/
+├── data/
+├── diagrams/
+├── notebooks/
+├── results/
+│   ├── customer_segments_pca.png
+│   └── price_multiplier_per_cluster.png
+├── README.md
+├── requirements.txt
+└── .gitignore
+```
 
-Deep learning-based recommendation models
+---
 
-Advanced policy gradient methods for pricing
+## 🔮 Future Improvements
 
-A/B testing simulation
+- Incorporate demand elasticity into RL reward for segment-differentiated pricing
+- Replace Q-Learning with Policy Gradient (PPO) for continuous action space pricing
+- Add deep learning-based recommendation (neural collaborative filtering)
+- Build real-time inference pipeline with FastAPI
+- A/B testing simulation to validate pricing strategies
 
+---
 
+## 📬 Connect
 
-
-
-
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)]([https://linkedin.com/in/sridivyadasari])
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/Diviya-tech)
